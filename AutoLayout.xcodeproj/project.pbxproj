@@ -21,6 +21,7 @@
 		D2332977181221E5007583CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2332959181221E5007583CC /* UIKit.framework */; };
 		D233297F181221E5007583CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D233297D181221E5007583CC /* InfoPlist.strings */; };
 		D2332981181221E5007583CC /* AutoLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2332980181221E5007583CC /* AutoLayoutTests.m */; };
+		D233298C181221FF007583CC /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D233298B181221FF007583CC /* UIView+SDCAutoLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		D233297C181221E5007583CC /* AutoLayoutTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoLayoutTests-Info.plist"; sourceTree = "<group>"; };
 		D233297E181221E5007583CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D2332980181221E5007583CC /* AutoLayoutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutTests.m; sourceTree = "<group>"; };
+		D233298A181221FF007583CC /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
+		D233298B181221FF007583CC /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 		D233295B181221E5007583CC /* AutoLayout */ = {
 			isa = PBXGroup;
 			children = (
+				D233298A181221FF007583CC /* UIView+SDCAutoLayout.h */,
+				D233298B181221FF007583CC /* UIView+SDCAutoLayout.m */,
 				D2332964181221E5007583CC /* SDCAppDelegate.h */,
 				D2332965181221E5007583CC /* SDCAppDelegate.m */,
 				D2332967181221E5007583CC /* Main.storyboard */,
@@ -252,6 +257,7 @@
 			files = (
 				D233296C181221E5007583CC /* SDCViewController.m in Sources */,
 				D2332962181221E5007583CC /* main.m in Sources */,
+				D233298C181221FF007583CC /* UIView+SDCAutoLayout.m in Sources */,
 				D2332966181221E5007583CC /* SDCAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
