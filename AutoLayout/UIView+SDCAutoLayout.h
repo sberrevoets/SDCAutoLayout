@@ -15,4 +15,6 @@
 - (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges;
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view;
 
+- (void)sdc_centerInSuperview;
+
 @end
