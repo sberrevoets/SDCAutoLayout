@@ -12,4 +12,7 @@
 
 - (UIView *)sdc_commonAncestorWithView:(UIView *)view;
 
+- (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges;
+- (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view;
+
 @end
