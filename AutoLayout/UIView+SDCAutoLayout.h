@@ -18,6 +18,16 @@
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view;
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets;
 
+- (void)sdc_alignCentersWithView:(UIView *)view;
+- (void)sdc_alignCentersWithView:(UIView *)view offset:(UIOffset)offset;
+- (void)sdc_alignHorizontalCenterWithView:(UIView *)view;
+- (void)sdc_alignHorizontalCenterWithView:(UIView *)view offset:(CGFloat)offset;
+- (void)sdc_alignVerticalCenterWithView:(UIView *)view;
+- (void)sdc_alignVerticalCenterWithView:(UIView *)view offset:(CGFloat)offset;
+
+- (void)sdc_alignBaselineWithView:(UIView *)view;
+- (void)sdc_alignBaselineWithView:(UIView *)view offset:(CGFloat)offset;
+
 - (void)pinWidth:(CGFloat)width;
 - (void)pinHeight:(CGFloat)height;
 - (void)pinSize:(CGSize)size;
