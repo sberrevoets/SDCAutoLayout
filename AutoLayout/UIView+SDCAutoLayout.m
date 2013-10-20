@@ -68,7 +68,15 @@
 }
 
 - (void)sdc_centerInSuperview {
+	[self sdc_horizontallyCenterInSuperview];
+	[self sdc_verticallyCenterInSuperview];
+}
+
+- (void)sdc_horizontallyCenterInSuperview {
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+}
+
+- (void)sdc_verticallyCenterInSuperview {
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
 }
 

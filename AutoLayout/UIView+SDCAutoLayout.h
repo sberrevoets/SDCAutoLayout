@@ -19,5 +19,7 @@
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets;
 
 - (void)sdc_centerInSuperview;
+- (void)sdc_horizontallyCenterInSuperview;
+- (void)sdc_verticallyCenterInSuperview;
 
 @end
