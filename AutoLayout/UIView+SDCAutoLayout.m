@@ -110,17 +110,17 @@
 
 #pragma mark - Pinning
 
-- (void)pinWidth:(CGFloat)width {
+- (void)sdc_pinWidth:(CGFloat)width {
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width]];
 }
 
-- (void)pinHeight:(CGFloat)height {
+- (void)sdc_pinHeight:(CGFloat)height {
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height]];
 }
 
-- (void)pinSize:(CGSize)size {
-	[self pinWidth:size.width];
-	[self pinHeight:size.height];
+- (void)sdc_pinSize:(CGSize)size {
+	[self sdc_pinWidth:size.width];
+	[self sdc_pinHeight:size.height];
 }
 
 - (void)sdc_centerInSuperview {

@@ -28,9 +28,9 @@
 - (void)sdc_alignBaselineWithView:(UIView *)view;
 - (void)sdc_alignBaselineWithView:(UIView *)view offset:(CGFloat)offset;
 
-- (void)pinWidth:(CGFloat)width;
-- (void)pinHeight:(CGFloat)height;
-- (void)pinSize:(CGSize)size;
+- (void)sdc_pinWidth:(CGFloat)width;
+- (void)sdc_pinHeight:(CGFloat)height;
+- (void)sdc_pinSize:(CGSize)size;
 
 - (void)sdc_centerInSuperview;
 - (void)sdc_horizontallyCenterInSuperview;
