@@ -13,7 +13,10 @@
 - (UIView *)sdc_commonAncestorWithView:(UIView *)view;
 
 - (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges;
+- (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets;
+
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view;
+- (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets;
 
 - (void)sdc_centerInSuperview;
 

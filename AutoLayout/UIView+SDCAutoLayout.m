@@ -33,17 +33,25 @@
 }
 
 - (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges {
-	[self sdc_alignEdges:edges withView:self.superview];
+	[self sdc_alignEdgesWithSuperview:edges insets:UIEdgeInsetsZero];
+}
+
+- (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets {
+	[self sdc_alignEdges:edges withView:self.superview insets:insets];
 }
 
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view {
-	if (edges & UIRectEdgeTop)		[self sdc_alignEdge:UIRectEdgeTop withView:view];
-	if (edges & UIRectEdgeRight)	[self sdc_alignEdge:UIRectEdgeRight withView:view];
-	if (edges & UIRectEdgeBottom)	[self sdc_alignEdge:UIRectEdgeBottom withView:view];
-	if (edges & UIRectEdgeLeft)		[self sdc_alignEdge:UIRectEdgeLeft withView:view];
+	[self sdc_alignEdges:edges withView:view insets:UIEdgeInsetsZero];
 }
 
-- (void)sdc_alignEdge:(UIRectEdge)edge withView:(UIView *)view {
+- (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets {
+	if (edges & UIRectEdgeTop)		[self sdc_alignEdge:UIRectEdgeTop withView:view inset:insets.top];
+	if (edges & UIRectEdgeRight)	[self sdc_alignEdge:UIRectEdgeRight withView:view inset:insets.right];
+	if (edges & UIRectEdgeBottom)	[self sdc_alignEdge:UIRectEdgeBottom withView:view inset:insets.bottom];
+	if (edges & UIRectEdgeLeft)		[self sdc_alignEdge:UIRectEdgeLeft withView:view inset:insets.left];
+}
+
+- (void)sdc_alignEdge:(UIRectEdge)edge withView:(UIView *)view inset:(CGFloat)inset {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
 	
 	NSLayoutAttribute attribute = NSLayoutAttributeNotAnAttribute;
@@ -51,12 +59,12 @@
 		case UIRectEdgeTop:		attribute = NSLayoutAttributeTop;		break;
 		case UIRectEdgeRight:	attribute = NSLayoutAttributeRight;		break;
 		case UIRectEdgeBottom:	attribute = NSLayoutAttributeBottom;	break;
-		case UIRectEdgeLeft: attribute = NSLayoutAttributeLeft;			break;
+		case UIRectEdgeLeft: 	attribute = NSLayoutAttributeLeft;		break;
 		default: break;
 	}
 	
 	if (attribute != NSLayoutAttributeNotAnAttribute)
-		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:NSLayoutRelationEqual toItem:view attribute:attribute multiplier:1 constant:0]];
+		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:NSLayoutRelationEqual toItem:view attribute:attribute multiplier:1 constant:inset]];
 }
 
 - (void)sdc_centerInSuperview {
