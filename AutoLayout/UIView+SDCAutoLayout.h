@@ -32,6 +32,13 @@
 - (void)sdc_pinHeight:(CGFloat)height;
 - (void)sdc_pinSize:(CGSize)size;
 
+- (void)sdc_pinWidthToWidthOfView:(UIView *)view;
+- (void)sdc_pinWidthToWidthOfView:(UIView *)view offset:(CGFloat)offset;
+- (void)sdc_pinHeightToHeightOfView:(UIView *)view;
+- (void)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset;
+- (void)sdc_pinSizeToSizeOfView:(UIView *)view;
+- (void)sdc_pinSizeToSizeOfView:(UIView *)view offset:(UIOffset)offset;
+
 - (void)sdc_centerInSuperview;
 - (void)sdc_horizontallyCenterInSuperview;
 - (void)sdc_verticallyCenterInSuperview;

@@ -108,7 +108,7 @@
 	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBaseline multiplier:1 constant:offset]];
 }
 
-#pragma mark - Pinning
+#pragma mark - Pinning Constants
 
 - (void)sdc_pinWidth:(CGFloat)width {
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width]];
@@ -122,6 +122,36 @@
 	[self sdc_pinWidth:size.width];
 	[self sdc_pinHeight:size.height];
 }
+
+#pragma mark - Pinning Views
+
+- (void)sdc_pinWidthToWidthOfView:(UIView *)view {
+	[self sdc_pinWidthToWidthOfView:view offset:0];
+}
+
+- (void)sdc_pinWidthToWidthOfView:(UIView *)view offset:(CGFloat)offset {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1 constant:offset]];
+}
+
+- (void)sdc_pinHeightToHeightOfView:(UIView *)view {
+	[self sdc_pinHeightToHeightOfView:view offset:0];
+}
+
+- (void)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1 constant:offset]];
+
+}
+
+- (void)sdc_pinSizeToSizeOfView:(UIView *)view {
+	[self sdc_pinSizeToSizeOfView:view offset:UIOffsetZero];
+}
+
+- (void)sdc_pinSizeToSizeOfView:(UIView *)view offset:(UIOffset)offset {
+	[self sdc_pinWidthToWidthOfView:view offset:offset.horizontal];
+	[self sdc_pinHeightToHeightOfView:view offset:offset.vertical];
+}
+
+#pragma mark - Superview
 
 - (void)sdc_centerInSuperview {
 	[self sdc_horizontallyCenterInSuperview];
