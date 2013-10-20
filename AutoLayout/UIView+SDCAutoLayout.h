@@ -18,6 +18,10 @@
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view;
 - (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets;
 
+- (void)pinWidth:(CGFloat)width;
+- (void)pinHeight:(CGFloat)height;
+- (void)pinSize:(CGSize)size;
+
 - (void)sdc_centerInSuperview;
 - (void)sdc_horizontallyCenterInSuperview;
 - (void)sdc_verticallyCenterInSuperview;

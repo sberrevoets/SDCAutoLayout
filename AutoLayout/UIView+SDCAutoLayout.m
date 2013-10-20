@@ -67,6 +67,19 @@
 		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:NSLayoutRelationEqual toItem:view attribute:attribute multiplier:1 constant:inset]];
 }
 
+- (void)pinWidth:(CGFloat)width {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width]];
+}
+
+- (void)pinHeight:(CGFloat)height {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height]];
+}
+
+- (void)pinSize:(CGSize)size {
+	[self pinWidth:size.width];
+	[self pinHeight:size.height];
+}
+
 - (void)sdc_centerInSuperview {
 	[self sdc_horizontallyCenterInSuperview];
 	[self sdc_verticallyCenterInSuperview];
