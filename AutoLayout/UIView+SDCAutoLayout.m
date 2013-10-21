@@ -151,6 +151,29 @@
 	[self sdc_pinHeightToHeightOfView:view offset:offset.vertical];
 }
 
+- (void)sdc_pinHorizontalSpacing:(CGFloat)spacing toView:(UIView *)view {
+	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
+	if (spacing >= 0) {
+		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeRight multiplier:1 constant:spacing]];
+	} else {
+		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeLeft multiplier:1 constant:spacing]];
+	}
+}
+
+- (void)sdc_pinVerticalSpacing:(CGFloat)spacing toView:(UIView *)view {
+	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
+	if (spacing >= 0) {
+		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBottom multiplier:1 constant:spacing]];
+	} else {
+		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeTop multiplier:1 constant:spacing]];
+	}
+}
+
+- (void)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view {
+	[self sdc_pinHorizontalSpacing:spacing.horizontal toView:view];
+	[self sdc_pinVerticalSpacing:spacing.vertical toView:view];
+}
+
 #pragma mark - Superview
 
 - (void)sdc_centerInSuperview {

@@ -39,6 +39,16 @@
 - (void)sdc_pinSizeToSizeOfView:(UIView *)view;
 - (void)sdc_pinSizeToSizeOfView:(UIView *)view offset:(UIOffset)offset;
 
+// Positive (or 0) means self will be placed to the right of view
+// Negative means self will be placed to the left of view
+- (void)sdc_pinHorizontalSpacing:(CGFloat)spacing toView:(UIView *)view;
+
+// Positive (or 0) means self will be placed below view
+// Negative means self will be placed above view
+- (void)sdc_pinVerticalSpacing:(CGFloat)spacing toView:(UIView *)view;
+
+- (void)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view;
+
 - (void)sdc_centerInSuperview;
 - (void)sdc_horizontallyCenterInSuperview;
 - (void)sdc_verticallyCenterInSuperview;
