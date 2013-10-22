@@ -22,6 +22,7 @@
 		D233297F181221E5007583CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D233297D181221E5007583CC /* InfoPlist.strings */; };
 		D2332981181221E5007583CC /* AutoLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2332980181221E5007583CC /* AutoLayoutTests.m */; };
 		D233298C181221FF007583CC /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D233298B181221FF007583CC /* UIView+SDCAutoLayout.m */; };
+		D233298E18161651007583CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D233298D18161651007583CC /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D2332980181221E5007583CC /* AutoLayoutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutTests.m; sourceTree = "<group>"; };
 		D233298A181221FF007583CC /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
 		D233298B181221FF007583CC /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
+		D233298D18161651007583CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		D2332949181221E5007583CC = {
 			isa = PBXGroup;
 			children = (
+				D233298D18161651007583CC /* README.md */,
 				D233295B181221E5007583CC /* AutoLayout */,
 				D233297A181221E5007583CC /* AutoLayoutTests */,
 				D2332954181221E5007583CC /* Frameworks */,
@@ -236,6 +239,7 @@
 			files = (
 				D233296E181221E5007583CC /* Images.xcassets in Resources */,
 				D2332960181221E5007583CC /* InfoPlist.strings in Resources */,
+				D233298E18161651007583CC /* README.md in Resources */,
 				D2332969181221E5007583CC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +471,7 @@
 				D2332986181221E5007583CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2332987181221E5007583CC /* Build configuration list for PBXNativeTarget "AutoLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +480,7 @@
 				D2332989181221E5007583CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
