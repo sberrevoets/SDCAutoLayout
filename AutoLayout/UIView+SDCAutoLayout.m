@@ -101,6 +101,33 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset]];
 }
 
+#pragma mark Superview
+
+- (void)sdc_centerInSuperview {
+	[self sdc_centerInSuperviewWithOffset:UIOffsetZero];
+}
+
+- (void)sdc_centerInSuperviewWithOffset:(UIOffset)offset {
+	[self sdc_horizontallyCenterInSuperviewWithOffset:offset.horizontal];
+	[self sdc_verticallyCenterInSuperviewWithOffset:offset.vertical];
+}
+
+- (void)sdc_horizontallyCenterInSuperview {
+	[self sdc_horizontallyCenterInSuperviewWithOffset:0];
+}
+
+- (void)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset]];
+}
+
+- (void)sdc_verticallyCenterInSuperview {
+	[self sdc_verticallyCenterInSuperviewWithOffset:0];
+}
+
+- (void)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset]];
+}
+
 #pragma mark - Baseline Alignment
 
 - (void)sdc_alignBaselineWithView:(UIView *)view {
@@ -142,7 +169,6 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 
 - (void)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset {
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1 constant:offset]];
-
 }
 
 - (void)sdc_pinSizeToSizeOfView:(UIView *)view {
@@ -153,6 +179,8 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 	[self sdc_pinWidthToWidthOfView:view offset:offset.horizontal];
 	[self sdc_pinHeightToHeightOfView:view offset:offset.vertical];
 }
+
+#pragma mark - Pinning Spacing
 
 - (void)sdc_pinHorizontalSpacing:(CGFloat)spacing toView:(UIView *)view {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
@@ -175,33 +203,6 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 - (void)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view {
 	[self sdc_pinHorizontalSpacing:spacing.horizontal toView:view];
 	[self sdc_pinVerticalSpacing:spacing.vertical toView:view];
-}
-
-#pragma mark - Superview
-
-- (void)sdc_centerInSuperview {
-	[self sdc_centerInSuperviewWithOffset:UIOffsetZero];
-}
-
-- (void)sdc_centerInSuperviewWithOffset:(UIOffset)offset {
-	[self sdc_horizontallyCenterInSuperviewWithOffset:offset.horizontal];
-	[self sdc_verticallyCenterInSuperviewWithOffset:offset.vertical];
-}
-
-- (void)sdc_horizontallyCenterInSuperview {
-	[self sdc_horizontallyCenterInSuperviewWithOffset:0];
-}
-
-- (void)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset]];
-}
-
-- (void)sdc_verticallyCenterInSuperview {
-	[self sdc_verticallyCenterInSuperviewWithOffset:0];
-}
-
-- (void)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset]];
 }
 
 @end
