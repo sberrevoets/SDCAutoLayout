@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT CGFloat const SDCAutoLayoutStandardSiblingDistance;
+FOUNDATION_EXPORT CGFloat const SDCAutoLayoutStandardParentChildDistance;
+
 @interface UIView (SDCAutoLayout)
 
 - (UIView *)sdc_commonAncestorWithView:(UIView *)view;

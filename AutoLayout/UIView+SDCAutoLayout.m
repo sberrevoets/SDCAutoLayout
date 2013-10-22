@@ -8,6 +8,9 @@
 
 #import "UIView+SDCAutoLayout.h"
 
+CGFloat const SDCAutoLayoutStandardSiblingDistance = 8;
+CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
+
 @implementation UIView (SDCAutoLayout)
 
 - (UIView *)sdc_commonAncestorWithView:(UIView *)view {
