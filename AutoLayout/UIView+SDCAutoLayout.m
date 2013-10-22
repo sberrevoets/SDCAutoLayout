@@ -177,16 +177,28 @@
 #pragma mark - Superview
 
 - (void)sdc_centerInSuperview {
-	[self sdc_horizontallyCenterInSuperview];
-	[self sdc_verticallyCenterInSuperview];
+	[self sdc_centerInSuperviewWithOffset:UIOffsetZero];
+}
+
+- (void)sdc_centerInSuperviewWithOffset:(UIOffset)offset {
+	[self sdc_horizontallyCenterInSuperviewWithOffset:offset.horizontal];
+	[self sdc_verticallyCenterInSuperviewWithOffset:offset.vertical];
 }
 
 - (void)sdc_horizontallyCenterInSuperview {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+	[self sdc_horizontallyCenterInSuperviewWithOffset:0];
+}
+
+- (void)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset]];
 }
 
 - (void)sdc_verticallyCenterInSuperview {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+	[self sdc_verticallyCenterInSuperviewWithOffset:0];
+}
+
+- (void)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset]];
 }
 
 @end

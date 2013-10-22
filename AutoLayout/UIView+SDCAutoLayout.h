@@ -50,7 +50,10 @@
 - (void)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view;
 
 - (void)sdc_centerInSuperview;
+- (void)sdc_centerInSuperviewWithOffset:(UIOffset)offset;
 - (void)sdc_horizontallyCenterInSuperview;
+- (void)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset;
 - (void)sdc_verticallyCenterInSuperview;
+- (void)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset;
 
 @end
