@@ -144,8 +144,40 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width]];
 }
 
+- (void)sdc_setMinimumWidth:(CGFloat)minimumWidth {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:minimumWidth]];
+}
+
+- (void)sdc_setMaximumWidth:(CGFloat)maximumWidth {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:maximumWidth]];
+}
+
+- (void)sdc_setMaximumWidthToSuperviewWidth {
+	[self sdc_setMaximumWidthToSuperviewWidthWithOffset:0];
+}
+
+- (void)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset {
+	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeWidth multiplier:1 constant:offset]];
+}
+
 - (void)sdc_pinHeight:(CGFloat)height {
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height]];
+}
+
+- (void)sdc_setMinimumHeight:(CGFloat)minimumHeight {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:minimumHeight]];
+}
+
+- (void)sdc_setMaximumHeight:(CGFloat)maximumHeight {
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:maximumHeight]];
+}
+
+- (void)sdc_setMaximumHeightToSuperviewHeight {
+	[self sdc_setMaximumWidthToSuperviewWidthWithOffset:0];
+}
+
+- (void)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset {
+	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:offset]];
 }
 
 - (void)sdc_pinSize:(CGSize)size {

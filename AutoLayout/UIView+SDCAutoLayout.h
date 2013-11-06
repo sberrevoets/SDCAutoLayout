@@ -46,7 +46,18 @@ FOUNDATION_EXPORT CGFloat const SDCAutoLayoutStandardParentChildDistance;
 
 // Pinning a view's dimensions with constants
 - (void)sdc_pinWidth:(CGFloat)width;
+
+- (void)sdc_setMinimumWidth:(CGFloat)minimumWidth;
+- (void)sdc_setMaximumWidth:(CGFloat)maximumWidth;
+- (void)sdc_setMaximumWidthToSuperviewWidth;
+- (void)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset;
+
 - (void)sdc_pinHeight:(CGFloat)height;
+- (void)sdc_setMinimumHeight:(CGFloat)minimumHeight;
+- (void)sdc_setMaximumHeight:(CGFloat)maximumHeight;
+- (void)sdc_setMaximumHeightToSuperviewHeight;
+- (void)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset;
+
 - (void)sdc_pinSize:(CGSize)size;
 
 // Pinning a view's dimensions to another view
