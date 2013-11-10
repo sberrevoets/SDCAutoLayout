@@ -192,7 +192,8 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (void)sdc_pinWidthToWidthOfView:(UIView *)view offset:(CGFloat)offset {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1 constant:offset]];
+	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
+	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1 constant:offset]];
 }
 
 - (void)sdc_pinHeightToHeightOfView:(UIView *)view {
@@ -200,7 +201,8 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (void)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1 constant:offset]];
+	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
+	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1 constant:offset]];
 }
 
 - (void)sdc_pinSizeToSizeOfView:(UIView *)view {
