@@ -173,7 +173,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (void)sdc_setMaximumHeightToSuperviewHeight {
-	[self sdc_setMaximumWidthToSuperviewWidthWithOffset:0];
+	[self sdc_setMaximumHeightToSuperviewHeightWithOffset:0];
 }
 
 - (void)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset {
