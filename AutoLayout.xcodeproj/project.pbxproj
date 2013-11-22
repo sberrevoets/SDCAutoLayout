@@ -24,6 +24,7 @@
 		D233298C181221FF007583CC /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D233298B181221FF007583CC /* UIView+SDCAutoLayout.m */; };
 		D233298E18161651007583CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D233298D18161651007583CC /* README.md */; };
 		D2332990181616A2007583CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D233298F181616A2007583CC /* LICENSE */; };
+		D2A5201A1840181700837A1A /* SDCAutoLayout.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2A520191840181700837A1A /* SDCAutoLayout.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		D233298B181221FF007583CC /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
 		D233298D18161651007583CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D233298F181616A2007583CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D2A520191840181700837A1A /* SDCAutoLayout.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SDCAutoLayout.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				D233298D18161651007583CC /* README.md */,
 				D233298F181616A2007583CC /* LICENSE */,
+				D2A520191840181700837A1A /* SDCAutoLayout.podspec */,
 				D233295B181221E5007583CC /* AutoLayout */,
 				D233297A181221E5007583CC /* AutoLayoutTests */,
 				D2332954181221E5007583CC /* Frameworks */,
@@ -243,6 +246,7 @@
 				D233296E181221E5007583CC /* Images.xcassets in Resources */,
 				D2332960181221E5007583CC /* InfoPlist.strings in Resources */,
 				D233298E18161651007583CC /* README.md in Resources */,
+				D2A5201A1840181700837A1A /* SDCAutoLayout.podspec in Resources */,
 				D2332969181221E5007583CC /* Main.storyboard in Resources */,
 				D2332990181616A2007583CC /* LICENSE in Resources */,
 			);
