@@ -57,8 +57,10 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (void)sdc_alignEdge:(UIRectEdge)edge withView:(UIView *)view inset:(CGFloat)inset {
-	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
-	
+	[self sdc_alignEdge:edge withEdge:edge ofView:view inset:inset];
+}
+
+- (NSLayoutAttribute)sdc_layoutAttributeFromRectEdge:(UIRectEdge)edge {
 	NSLayoutAttribute attribute = NSLayoutAttributeNotAnAttribute;
 	switch (edge) {
 		case UIRectEdgeTop:		attribute = NSLayoutAttributeTop;		break;
@@ -68,8 +70,21 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 		default: break;
 	}
 	
-	if (attribute != NSLayoutAttributeNotAnAttribute)
-		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:NSLayoutRelationEqual toItem:view attribute:attribute multiplier:1 constant:inset]];
+	return attribute;
+}
+
+- (void)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view {
+	[self sdc_alignEdge:edge withEdge:otherEdge ofView:view inset:0];
+}
+
+- (void)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view inset:(CGFloat)inset {
+	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
+	
+	NSLayoutAttribute attribute = [self sdc_layoutAttributeFromRectEdge:edge];
+	NSLayoutAttribute otherAttribute = [self sdc_layoutAttributeFromRectEdge:otherEdge];
+	
+	if (attribute != NSLayoutAttributeNotAnAttribute && otherAttribute != NSLayoutAttributeNotAnAttribute)
+		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:NSLayoutRelationEqual toItem:view attribute:otherAttribute multiplier:1 constant:inset]];
 }
 
 #pragma mark - Center Alignment
