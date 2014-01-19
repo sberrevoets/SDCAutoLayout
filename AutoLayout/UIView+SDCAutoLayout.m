@@ -37,27 +37,31 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 
 #pragma mark - Edge Alignment
 
-- (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges {
-	[self sdc_alignEdgesWithSuperview:edges insets:UIEdgeInsetsZero];
+- (NSArray *)sdc_alignEdgesWithSuperview:(UIRectEdge)edges {
+	return [self sdc_alignEdgesWithSuperview:edges insets:UIEdgeInsetsZero];
 }
 
-- (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets {
-	[self sdc_alignEdges:edges withView:self.superview insets:insets];
+- (NSArray *)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets {
+	return [self sdc_alignEdges:edges withView:self.superview insets:insets];
 }
 
-- (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view {
-	[self sdc_alignEdges:edges withView:view insets:UIEdgeInsetsZero];
+- (NSArray *)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view {
+	return [self sdc_alignEdges:edges withView:view insets:UIEdgeInsetsZero];
 }
 
-- (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets {
-	if (edges & UIRectEdgeTop)		[self sdc_alignEdge:UIRectEdgeTop withView:view inset:insets.top];
-	if (edges & UIRectEdgeRight)	[self sdc_alignEdge:UIRectEdgeRight withView:view inset:insets.right];
-	if (edges & UIRectEdgeBottom)	[self sdc_alignEdge:UIRectEdgeBottom withView:view inset:insets.bottom];
-	if (edges & UIRectEdgeLeft)		[self sdc_alignEdge:UIRectEdgeLeft withView:view inset:insets.left];
+- (NSArray *)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets {
+	NSMutableArray *constraints = [NSMutableArray array];
+	
+	if (edges & UIRectEdgeTop)		[constraints addObject:[self sdc_alignEdge:UIRectEdgeTop withView:view inset:insets.top]];
+	if (edges & UIRectEdgeRight)	[constraints addObject:[self sdc_alignEdge:UIRectEdgeRight withView:view inset:insets.right]];
+	if (edges & UIRectEdgeBottom)	[constraints addObject:[self sdc_alignEdge:UIRectEdgeBottom withView:view inset:insets.bottom]];
+	if (edges & UIRectEdgeLeft)		[constraints addObject:[self sdc_alignEdge:UIRectEdgeLeft withView:view inset:insets.left]];
+	
+	return constraints;
 }
 
-- (void)sdc_alignEdge:(UIRectEdge)edge withView:(UIView *)view inset:(CGFloat)inset {
-	[self sdc_alignEdge:edge withEdge:edge ofView:view inset:inset];
+- (NSLayoutConstraint *)sdc_alignEdge:(UIRectEdge)edge withView:(UIView *)view inset:(CGFloat)inset {
+	return [self sdc_alignEdge:edge withEdge:edge ofView:view inset:inset];
 }
 
 - (NSLayoutAttribute)sdc_layoutAttributeFromRectEdge:(UIRectEdge)edge {
@@ -73,185 +77,248 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 	return attribute;
 }
 
-- (void)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view {
-	[self sdc_alignEdge:edge withEdge:otherEdge ofView:view inset:0];
+- (NSLayoutConstraint *)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view {
+	return [self sdc_alignEdge:edge withEdge:otherEdge ofView:view inset:0];
 }
 
-- (void)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view inset:(CGFloat)inset {
+- (NSLayoutConstraint *)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view inset:(CGFloat)inset {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
 	
 	NSLayoutAttribute attribute = [self sdc_layoutAttributeFromRectEdge:edge];
 	NSLayoutAttribute otherAttribute = [self sdc_layoutAttributeFromRectEdge:otherEdge];
 	
-	if (attribute != NSLayoutAttributeNotAnAttribute && otherAttribute != NSLayoutAttributeNotAnAttribute)
-		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:NSLayoutRelationEqual toItem:view attribute:otherAttribute multiplier:1 constant:inset]];
+	if (attribute == NSLayoutAttributeNotAnAttribute || otherAttribute == NSLayoutAttributeNotAnAttribute)
+		return nil;
+	
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:NSLayoutRelationEqual toItem:view attribute:otherAttribute multiplier:1 constant:inset];
+	[commonAncestor addConstraint:constraint];
+	
+	return constraint;
 }
 
 #pragma mark - Center Alignment
 
-- (void)sdc_alignCentersWithView:(UIView *)view {
-	[self sdc_alignCentersWithView:view];
+- (NSArray *)sdc_alignCentersWithView:(UIView *)view {
+	return [self sdc_alignCentersWithView:view];
 }
 
-- (void)sdc_alignCentersWithView:(UIView *)view offset:(UIOffset)offset {
-	[self sdc_alignHorizontalCenterWithView:view offset:offset.horizontal];
-	[self sdc_alignVerticalCenterWithView:view offset:offset.vertical];
+- (NSArray *)sdc_alignCentersWithView:(UIView *)view offset:(UIOffset)offset {
+	return @[[self sdc_alignHorizontalCenterWithView:view offset:offset.horizontal], [self sdc_alignVerticalCenterWithView:view offset:offset.vertical]];
 }
 
-- (void)sdc_alignHorizontalCenterWithView:(UIView *)view {
-	[self sdc_alignHorizontalCenterWithView:view offset:UIOffsetZero.horizontal];
+- (NSLayoutConstraint *)sdc_alignHorizontalCenterWithView:(UIView *)view {
+	return [self sdc_alignHorizontalCenterWithView:view offset:UIOffsetZero.horizontal];
 }
 
-- (void)sdc_alignHorizontalCenterWithView:(UIView *)view offset:(CGFloat)offset {
+- (NSLayoutConstraint *)sdc_alignHorizontalCenterWithView:(UIView *)view offset:(CGFloat)offset {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
-	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset]];
+	
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset];
+	[commonAncestor addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_alignVerticalCenterWithView:(UIView *)view {
-	[self sdc_alignVerticalCenterWithView:view offset:UIOffsetZero.vertical];
+- (NSLayoutConstraint *)sdc_alignVerticalCenterWithView:(UIView *)view {
+	return [self sdc_alignVerticalCenterWithView:view offset:UIOffsetZero.vertical];
 }
 
-- (void)sdc_alignVerticalCenterWithView:(UIView *)view offset:(CGFloat)offset {
+- (NSLayoutConstraint *)sdc_alignVerticalCenterWithView:(UIView *)view offset:(CGFloat)offset {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
-	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset]];
+	
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset];
+	[commonAncestor addConstraint:constraint];
+	
+	return constraint;
 }
 
 #pragma mark Superview
 
-- (void)sdc_centerInSuperview {
-	[self sdc_centerInSuperviewWithOffset:UIOffsetZero];
+- (NSArray *)sdc_centerInSuperview {
+	return [self sdc_centerInSuperviewWithOffset:UIOffsetZero];
 }
 
-- (void)sdc_centerInSuperviewWithOffset:(UIOffset)offset {
-	[self sdc_horizontallyCenterInSuperviewWithOffset:offset.horizontal];
-	[self sdc_verticallyCenterInSuperviewWithOffset:offset.vertical];
+- (NSArray *)sdc_centerInSuperviewWithOffset:(UIOffset)offset {
+	return @[[self sdc_horizontallyCenterInSuperviewWithOffset:offset.horizontal],
+	[self sdc_verticallyCenterInSuperviewWithOffset:offset.vertical]];
 }
 
-- (void)sdc_horizontallyCenterInSuperview {
-	[self sdc_horizontallyCenterInSuperviewWithOffset:0];
+- (NSLayoutConstraint *)sdc_horizontallyCenterInSuperview {
+	return [self sdc_horizontallyCenterInSuperviewWithOffset:0];
 }
 
-- (void)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset]];
+- (NSLayoutConstraint *)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset];
+	[self.superview addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_verticallyCenterInSuperview {
-	[self sdc_verticallyCenterInSuperviewWithOffset:0];
+- (NSLayoutConstraint *)sdc_verticallyCenterInSuperview {
+	return [self sdc_verticallyCenterInSuperviewWithOffset:0];
 }
 
-- (void)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset]];
+- (NSLayoutConstraint *)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset];
+	
+	[self.superview addConstraint:constraint];
+	return constraint;
 }
 
 #pragma mark - Baseline Alignment
 
-- (void)sdc_alignBaselineWithView:(UIView *)view {
-	[self sdc_alignBaselineWithView:view offset:0];
+- (NSLayoutConstraint *)sdc_alignBaselineWithView:(UIView *)view {
+	return [self sdc_alignBaselineWithView:view offset:0];
 }
-- (void)sdc_alignBaselineWithView:(UIView *)view offset:(CGFloat)offset {
+- (NSLayoutConstraint *)sdc_alignBaselineWithView:(UIView *)view offset:(CGFloat)offset {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
-	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBaseline multiplier:1 constant:offset]];
+	
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBaseline multiplier:1 constant:offset];
+	[commonAncestor addConstraint:constraint];
+	
+	return constraint;
 }
 
 #pragma mark - Pinning Constants
 
-- (void)sdc_pinWidth:(CGFloat)width {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width]];
+- (NSLayoutConstraint *)sdc_pinWidth:(CGFloat)width {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width];
+	[self addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_setMinimumWidth:(CGFloat)minimumWidth {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:minimumWidth]];
+- (NSLayoutConstraint *)sdc_setMinimumWidth:(CGFloat)minimumWidth {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:minimumWidth];
+	[self addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_setMaximumWidth:(CGFloat)maximumWidth {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:maximumWidth]];
+- (NSLayoutConstraint *)sdc_setMaximumWidth:(CGFloat)maximumWidth {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:maximumWidth];
+	[self addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_setMaximumWidthToSuperviewWidth {
-	[self sdc_setMaximumWidthToSuperviewWidthWithOffset:0];
+- (NSLayoutConstraint *)sdc_setMaximumWidthToSuperviewWidth {
+	return [self sdc_setMaximumWidthToSuperviewWidthWithOffset:0];
 }
 
-- (void)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeWidth multiplier:1 constant:offset]];
+- (NSLayoutConstraint *)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeWidth multiplier:1 constant:offset];
+	[self.superview addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_pinHeight:(CGFloat)height {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height]];
+- (NSLayoutConstraint *)sdc_pinHeight:(CGFloat)height {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
+	[self addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_setMinimumHeight:(CGFloat)minimumHeight {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:minimumHeight]];
+- (NSLayoutConstraint *)sdc_setMinimumHeight:(CGFloat)minimumHeight {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:minimumHeight];
+	[self addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_setMaximumHeight:(CGFloat)maximumHeight {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:maximumHeight]];
+- (NSLayoutConstraint *)sdc_setMaximumHeight:(CGFloat)maximumHeight {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:maximumHeight];
+	[self addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_setMaximumHeightToSuperviewHeight {
-	[self sdc_setMaximumHeightToSuperviewHeightWithOffset:0];
+- (NSLayoutConstraint *)sdc_setMaximumHeightToSuperviewHeight {
+	return [self sdc_setMaximumHeightToSuperviewHeightWithOffset:0];
 }
 
-- (void)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset {
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:offset]];
+- (NSLayoutConstraint *)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset {
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:offset];
+	[self.superview addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_pinSize:(CGSize)size {
-	[self sdc_pinWidth:size.width];
-	[self sdc_pinHeight:size.height];
+- (NSArray *)sdc_pinSize:(CGSize)size {
+	return @[[self sdc_pinWidth:size.width], [self sdc_pinHeight:size.height]];
 }
 
 #pragma mark - Pinning Views
 
-- (void)sdc_pinWidthToWidthOfView:(UIView *)view {
-	[self sdc_pinWidthToWidthOfView:view offset:0];
+- (NSLayoutConstraint *)sdc_pinWidthToWidthOfView:(UIView *)view {
+	return [self sdc_pinWidthToWidthOfView:view offset:0];
 }
 
-- (void)sdc_pinWidthToWidthOfView:(UIView *)view offset:(CGFloat)offset {
+- (NSLayoutConstraint *)sdc_pinWidthToWidthOfView:(UIView *)view offset:(CGFloat)offset {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
-	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1 constant:offset]];
+	
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1 constant:offset];
+	[commonAncestor addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_pinHeightToHeightOfView:(UIView *)view {
-	[self sdc_pinHeightToHeightOfView:view offset:0];
+- (NSLayoutConstraint *)sdc_pinHeightToHeightOfView:(UIView *)view {
+	return [self sdc_pinHeightToHeightOfView:view offset:0];
 }
 
-- (void)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset {
+- (NSLayoutConstraint *)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
-	[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1 constant:offset]];
+	
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1 constant:offset];
+	[commonAncestor addConstraint:constraint];
+	
+	return constraint;
 }
 
-- (void)sdc_pinSizeToSizeOfView:(UIView *)view {
-	[self sdc_pinSizeToSizeOfView:view offset:UIOffsetZero];
+- (NSArray *)sdc_pinSizeToSizeOfView:(UIView *)view {
+	return [self sdc_pinSizeToSizeOfView:view offset:UIOffsetZero];
 }
 
-- (void)sdc_pinSizeToSizeOfView:(UIView *)view offset:(UIOffset)offset {
-	[self sdc_pinWidthToWidthOfView:view offset:offset.horizontal];
-	[self sdc_pinHeightToHeightOfView:view offset:offset.vertical];
+- (NSArray *)sdc_pinSizeToSizeOfView:(UIView *)view offset:(UIOffset)offset {
+	return @[[self sdc_pinWidthToWidthOfView:view offset:offset.horizontal],	[self sdc_pinHeightToHeightOfView:view offset:offset.vertical]];
 }
 
 #pragma mark - Pinning Spacing
 
-- (void)sdc_pinHorizontalSpacing:(CGFloat)spacing toView:(UIView *)view {
+- (NSLayoutConstraint *)sdc_pinHorizontalSpacing:(CGFloat)spacing toView:(UIView *)view {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
+	
+	NSLayoutConstraint *constraint;
+	
 	if (spacing >= 0) {
-		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeRight multiplier:1 constant:spacing]];
+		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeRight multiplier:1 constant:spacing];
 	} else {
-		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeLeft multiplier:1 constant:abs(spacing)]];
+		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeLeft multiplier:1 constant:abs(spacing)];
 	}
+	
+	[commonAncestor addConstraint:constraint];
+	return constraint;
 }
 
-- (void)sdc_pinVerticalSpacing:(CGFloat)spacing toView:(UIView *)view {
+- (NSLayoutConstraint *)sdc_pinVerticalSpacing:(CGFloat)spacing toView:(UIView *)view {
 	UIView *commonAncestor = [self sdc_commonAncestorWithView:view];
+	
+	NSLayoutConstraint *constraint;
+	
 	if (spacing >= 0) {
-		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBottom multiplier:1 constant:spacing]];
+		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBottom multiplier:1 constant:spacing];
 	} else {
-		[commonAncestor addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeTop multiplier:1 constant:abs(spacing)]];
+		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeTop multiplier:1 constant:abs(spacing)];
 	}
+	
+	[commonAncestor addConstraint:constraint];
+	return constraint;
 }
 
-- (void)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view {
-	[self sdc_pinHorizontalSpacing:spacing.horizontal toView:view];
-	[self sdc_pinVerticalSpacing:spacing.vertical toView:view];
+- (NSArray *)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view {
+	return @[[self sdc_pinHorizontalSpacing:spacing.horizontal toView:view], [self sdc_pinVerticalSpacing:spacing.vertical toView:view]];
 }
 
 @end

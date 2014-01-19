@@ -17,69 +17,69 @@ FOUNDATION_EXPORT CGFloat const SDCAutoLayoutStandardParentChildDistance;
 - (UIView *)sdc_commonAncestorWithView:(UIView *)view;
 
 // Aligning a view's edges with its superview
-- (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges;
-- (void)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets;
+- (NSArray *)sdc_alignEdgesWithSuperview:(UIRectEdge)edges;
+- (NSArray *)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets;
 
 // Aligning a view's edges with another view
-- (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view;
-- (void)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets;
+- (NSArray *)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view;
+- (NSArray *)sdc_alignEdges:(UIRectEdge)edges withView:(UIView *)view insets:(UIEdgeInsets)insets;
 
-- (void)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view;
-- (void)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view inset:(CGFloat)inset;
+- (NSLayoutConstraint *)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_alignEdge:(UIRectEdge)edge withEdge:(UIRectEdge)otherEdge ofView:(UIView *)view inset:(CGFloat)inset;
 
 // Aligning a view's center with another view
-- (void)sdc_alignCentersWithView:(UIView *)view;
-- (void)sdc_alignCentersWithView:(UIView *)view offset:(UIOffset)offset;
-- (void)sdc_alignHorizontalCenterWithView:(UIView *)view;
-- (void)sdc_alignHorizontalCenterWithView:(UIView *)view offset:(CGFloat)offset;
-- (void)sdc_alignVerticalCenterWithView:(UIView *)view;
-- (void)sdc_alignVerticalCenterWithView:(UIView *)view offset:(CGFloat)offset;
+- (NSArray *)sdc_alignCentersWithView:(UIView *)view;
+- (NSArray *)sdc_alignCentersWithView:(UIView *)view offset:(UIOffset)offset;
+- (NSLayoutConstraint *)sdc_alignHorizontalCenterWithView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_alignHorizontalCenterWithView:(UIView *)view offset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdc_alignVerticalCenterWithView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_alignVerticalCenterWithView:(UIView *)view offset:(CGFloat)offset;
 
 // Centering a view in its superview
-- (void)sdc_centerInSuperview;
-- (void)sdc_centerInSuperviewWithOffset:(UIOffset)offset;
-- (void)sdc_horizontallyCenterInSuperview;
-- (void)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset;
-- (void)sdc_verticallyCenterInSuperview;
-- (void)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset;
+- (NSArray *)sdc_centerInSuperview;
+- (NSArray *)sdc_centerInSuperviewWithOffset:(UIOffset)offset;
+- (NSLayoutConstraint *)sdc_horizontallyCenterInSuperview;
+- (NSLayoutConstraint *)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdc_verticallyCenterInSuperview;
+- (NSLayoutConstraint *)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset;
 
 // Align a view's baseline with another view
-- (void)sdc_alignBaselineWithView:(UIView *)view;
-- (void)sdc_alignBaselineWithView:(UIView *)view offset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdc_alignBaselineWithView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_alignBaselineWithView:(UIView *)view offset:(CGFloat)offset;
 
 // Pinning a view's dimensions with constants
-- (void)sdc_pinWidth:(CGFloat)width;
+- (NSLayoutConstraint *)sdc_pinWidth:(CGFloat)width;
 
-- (void)sdc_setMinimumWidth:(CGFloat)minimumWidth;
-- (void)sdc_setMaximumWidth:(CGFloat)maximumWidth;
-- (void)sdc_setMaximumWidthToSuperviewWidth;
-- (void)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdc_setMinimumWidth:(CGFloat)minimumWidth;
+- (NSLayoutConstraint *)sdc_setMaximumWidth:(CGFloat)maximumWidth;
+- (NSLayoutConstraint *)sdc_setMaximumWidthToSuperviewWidth;
+- (NSLayoutConstraint *)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset;
 
-- (void)sdc_pinHeight:(CGFloat)height;
-- (void)sdc_setMinimumHeight:(CGFloat)minimumHeight;
-- (void)sdc_setMaximumHeight:(CGFloat)maximumHeight;
-- (void)sdc_setMaximumHeightToSuperviewHeight;
-- (void)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdc_pinHeight:(CGFloat)height;
+- (NSLayoutConstraint *)sdc_setMinimumHeight:(CGFloat)minimumHeight;
+- (NSLayoutConstraint *)sdc_setMaximumHeight:(CGFloat)maximumHeight;
+- (NSLayoutConstraint *)sdc_setMaximumHeightToSuperviewHeight;
+- (NSLayoutConstraint *)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset;
 
-- (void)sdc_pinSize:(CGSize)size;
+- (NSArray *)sdc_pinSize:(CGSize)size;
 
 // Pinning a view's dimensions to another view
-- (void)sdc_pinWidthToWidthOfView:(UIView *)view;
-- (void)sdc_pinWidthToWidthOfView:(UIView *)view offset:(CGFloat)offset;
-- (void)sdc_pinHeightToHeightOfView:(UIView *)view;
-- (void)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset;
-- (void)sdc_pinSizeToSizeOfView:(UIView *)view;
-- (void)sdc_pinSizeToSizeOfView:(UIView *)view offset:(UIOffset)offset;
+- (NSLayoutConstraint *)sdc_pinWidthToWidthOfView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_pinWidthToWidthOfView:(UIView *)view offset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdc_pinHeightToHeightOfView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_pinHeightToHeightOfView:(UIView *)view offset:(CGFloat)offset;
+- (NSArray *)sdc_pinSizeToSizeOfView:(UIView *)view;
+- (NSArray *)sdc_pinSizeToSizeOfView:(UIView *)view offset:(UIOffset)offset;
 
 // Setting the spacing between a view and other view
 // A positive spacing (or 0) means self will be placed to the right of view
 // A negative spacing means self will be placed to the left of view
-- (void)sdc_pinHorizontalSpacing:(CGFloat)spacing toView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_pinHorizontalSpacing:(CGFloat)spacing toView:(UIView *)view;
 
 // A positive spacing (or 0) means self will be placed below view
 // A negative spacing means self will be placed above view
-- (void)sdc_pinVerticalSpacing:(CGFloat)spacing toView:(UIView *)view;
+- (NSLayoutConstraint *)sdc_pinVerticalSpacing:(CGFloat)spacing toView:(UIView *)view;
 
-- (void)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view;
+- (NSArray *)sdc_pinSpacing:(UIOffset)spacing toView:(UIView *)view;
 
 @end
