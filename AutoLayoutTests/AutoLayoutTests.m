@@ -22,6 +22,18 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
+- (void)  testAssertFail {
+	UIView *aView = [[UIView alloc] initWithFrame:CGRectZero];
+	[aView sdc_centerInSuperview];
+}
+
+- (void) testAssertPass {
+	UIView *aView = [[UIView alloc] initWithFrame:CGRectZero];
+	UIView *aParentView = [[UIView alloc] initWithFrame:CGRectZero];
+	[aParentView addSubview:aView];
+	[aView sdc_centerInSuperview];
+}
+
 - (void)testCommonAncestorWithView {
 	UIView *parent = [[UIView alloc] init];
 	UIView *subchild1 = [[UIView alloc] init];

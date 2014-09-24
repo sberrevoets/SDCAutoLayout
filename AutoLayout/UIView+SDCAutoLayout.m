@@ -42,6 +42,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSArray *)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	return [self sdc_alignEdges:edges withView:self.superview insets:insets];
 }
 
@@ -148,6 +149,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset];
 	[self.superview addConstraint:constraint];
 	
@@ -159,6 +161,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset];
 	
 	[self.superview addConstraint:constraint];
@@ -207,6 +210,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeWidth multiplier:1 constant:offset];
 	[self.superview addConstraint:constraint];
 	
@@ -239,6 +243,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:offset];
 	[self.superview addConstraint:constraint];
 	
