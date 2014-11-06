@@ -100,7 +100,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 #pragma mark - Center Alignment
 
 - (NSArray *)sdc_alignCentersWithView:(UIView *)view {
-	return [self sdc_alignCentersWithView:view];
+	return [self sdc_alignCentersWithView:view offset:UIOffsetZero];
 }
 
 - (NSArray *)sdc_alignCentersWithView:(UIView *)view offset:(UIOffset)offset {
