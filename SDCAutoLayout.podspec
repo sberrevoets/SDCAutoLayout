@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'SDCAutoLayout'
-  s.version      = '2.0.2'
+  s.version      = '2.0.3'
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.authors      = { 'Scott Berrevoets' => 's.berrevoets@me.com' }
   s.summary      = 'A UIView category that simplifies dealing with Auto Layout'
